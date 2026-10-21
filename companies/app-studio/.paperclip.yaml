@@ -1,14 +1,33 @@
 schema: paperclip/v1
+company:
+  requireBoardApprovalForNewAgents: true
 agents:
   ceo:
     icon: crown
     capabilities: Sets product direction and priorities, turns company goals into work, and coordinates the CTO and product designer.
+    adapter:
+      type: claude_local
+      config:
+        model: claude-opus-5-5
+        effort: high
   product-designer:
     icon: gem
     capabilities: Designs the app's user experience and visual design using Apple's Human Interface Guidelines, and reviews built screens.
+    adapter:
+      type: claude_local
+      config:
+        model: claude-opus-5-5
+        effort: high
+    permissions:
+      canCreateAgents: false
   cto:
     icon: cpu
     capabilities: Owns architecture and technical direction, breaks work into engineering tasks, and reviews all code.
+    adapter:
+      type: codex_local
+      config:
+        model: gpt-5.6-sol
+        modelReasoningEffort: xhigh
     inputs:
       env:
         GH_TOKEN:
@@ -17,6 +36,13 @@ agents:
   app-engineer:
     icon: code
     capabilities: Builds and maintains the iOS app (and later the macOS app) in Swift and SwiftUI.
+    adapter:
+      type: claude_local
+      config:
+        model: claude-opus-5-5
+        effort: high
+    permissions:
+      canCreateAgents: false
     inputs:
       env:
         GH_TOKEN:
@@ -25,6 +51,13 @@ agents:
   backend-engineer:
     icon: database
     capabilities: Builds the server-side code the app depends on, such as accounts, data sync, and APIs.
+    adapter:
+      type: codex_local
+      config:
+        model: gpt-5.6-sol
+        modelReasoningEffort: high
+    permissions:
+      canCreateAgents: false
     inputs:
       env:
         GH_TOKEN:
@@ -33,9 +66,23 @@ agents:
   qa:
     icon: bug
     capabilities: Tests the app in the iOS Simulator and on devices, reproduces bugs, and reports findings with evidence.
+    adapter:
+      type: claude_local
+      config:
+        model: claude-sonnet-5-5
+        effort: medium
+    permissions:
+      canCreateAgents: false
   release-engineer:
     icon: rocket
     capabilities: Proposes build, code signing, TestFlight, App Store, and server changes for board approval.
+    adapter:
+      type: codex_local
+      config:
+        model: gpt-5.6-sol
+        modelReasoningEffort: medium
+    permissions:
+      canCreateAgents: false
     inputs:
       env:
         GH_TOKEN:
@@ -44,3 +91,10 @@ agents:
   security-engineer:
     icon: shield
     capabilities: Reviews the app's security and privacy, including data storage, sign-in, network traffic, and App Store privacy requirements.
+    adapter:
+      type: claude_local
+      config:
+        model: claude-opus-5-5
+        effort: xhigh
+    permissions:
+      canCreateAgents: false
