@@ -1,0 +1,46 @@
+schema: paperclip/v1
+agents:
+  ceo:
+    icon: crown
+    capabilities: Sets product direction and priorities, turns company goals into work, and coordinates the CTO and product designer.
+  product-designer:
+    icon: gem
+    capabilities: Designs the app's user experience and visual design using Apple's Human Interface Guidelines, and reviews built screens.
+  cto:
+    icon: cpu
+    capabilities: Owns architecture and technical direction, breaks work into engineering tasks, and reviews all code.
+    inputs:
+      env:
+        GH_TOKEN:
+          kind: secret
+          requirement: optional
+  app-engineer:
+    icon: code
+    capabilities: Builds and maintains the iOS app (and later the macOS app) in Swift and SwiftUI.
+    inputs:
+      env:
+        GH_TOKEN:
+          kind: secret
+          requirement: optional
+  backend-engineer:
+    icon: database
+    capabilities: Builds the server-side code the app depends on, such as accounts, data sync, and APIs.
+    inputs:
+      env:
+        GH_TOKEN:
+          kind: secret
+          requirement: optional
+  qa:
+    icon: bug
+    capabilities: Tests the app in the iOS Simulator and on devices, reproduces bugs, and reports findings with evidence.
+  release-engineer:
+    icon: rocket
+    capabilities: Proposes build, code signing, TestFlight, App Store, and server changes for board approval.
+    inputs:
+      env:
+        GH_TOKEN:
+          kind: secret
+          requirement: optional
+  security-engineer:
+    icon: shield
+    capabilities: Reviews the app's security and privacy, including data storage, sign-in, network traffic, and App Store privacy requirements.
